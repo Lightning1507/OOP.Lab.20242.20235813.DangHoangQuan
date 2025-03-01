@@ -29,7 +29,7 @@ public class FirstDegreeEquation2{
                 JOptionPane.showMessageDialog(null, "The equation has no solution");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Result of equation x: "+(D1/D) + "\n" + "Result of equation y: "+(D2/D));
+            JOptionPane.showMessageDialog(null, "Result of x1: "+(D1/D) + "\n" + "Result of x2: "+(D2/D));
         }
         System.exit(0);
     }
