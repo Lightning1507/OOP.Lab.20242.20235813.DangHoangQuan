@@ -20,8 +20,8 @@ public class FirstDegreeEquation2{
         double D2=a11*b2-a21*b1;
         if (D == 0){
             if (D1 == 0 && D2 == 0){
-                if (b1 == 0 && b2 == 0){
-                    JOptionPane.showMessageDialog(null, "The equation has many solutions");
+                if (b1 == 0 && b2 == 0 || (a11/a21 == a12/a22 && a12/a22 == b1/b2)){
+                    JOptionPane.showMessageDialog(null, "The equation has countless solutions");
                 } else {
                     JOptionPane.showMessageDialog(null, "The equation has no solution");
                 }

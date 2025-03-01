@@ -10,6 +10,18 @@ public class FirstDegreeEquation3{
         double b = Double.parseDouble(s2);
         double c = Double.parseDouble(s3);
         double delta=b*b-4*a*c;
+        if (a==0){
+            if (b==0){
+                if (c==0){
+                    JOptionPane.showMessageDialog(null, "The equation has countless solutions");
+                } else {
+                    JOptionPane.showMessageDialog(null, "The equation has no solution");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "The equation has one solution: "+(-c/b));
+            }
+            System.exit(0);
+        }
         if (delta < 0){
             JOptionPane.showMessageDialog(null, "The equation has no solution");
         } else if (delta == 0){

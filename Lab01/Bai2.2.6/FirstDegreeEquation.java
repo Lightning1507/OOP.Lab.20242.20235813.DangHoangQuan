@@ -9,7 +9,7 @@ public class FirstDegreeEquation{
         double num2 = Double.parseDouble(s2);
         if (num1 == 0){
             if (num2 == 0){
-                JOptionPane.showMessageDialog(null, "The equation has many solutions");
+                JOptionPane.showMessageDialog(null, "The equation has countless solutions");
             } else {
                 JOptionPane.showMessageDialog(null, "The equation has no solution");
             }
