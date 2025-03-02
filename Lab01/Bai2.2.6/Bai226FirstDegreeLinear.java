@@ -1,6 +1,6 @@
 import javax.swing.JOptionPane;
 
-public class FirstDegreeEquation{
+public class Bai226FirstDegreeLinear{
     public static void main(String[] args){
         String s1,s2;
         s1 = JOptionPane.showInputDialog("Enter variable a: ");

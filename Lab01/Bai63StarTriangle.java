@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class StarTriangle {
+public class Bai63StarTriangle {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         int n;

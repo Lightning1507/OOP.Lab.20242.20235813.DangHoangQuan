@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Matrices {
+public class Bai66Matrices {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         int n1,m1;

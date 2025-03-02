@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class InputFromKeyboard{
+public class Bai62InputFromKeyboard{
     public static void main(String[] args){
         Scanner keyboard = new Scanner(System.in);
         

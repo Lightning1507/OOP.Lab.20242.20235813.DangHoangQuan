@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class DayOfMonth {
+public class Bai64DayOfMonth {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int m,y;
