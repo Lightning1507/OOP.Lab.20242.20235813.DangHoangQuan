@@ -1,0 +1,21 @@
+10.	Create Constructor method
+Question: If you create a constructor method to build a DVD by title then create a constructor method to build a DVD by category. Does JAVA allow you to do this?
+Answer: Java không cho phép tạo hai constructor trong cùng một lớp nếu chúng chỉ khác nhau về tên tham số nhưng có cùng kiểu dữ liệu và số lượng tham số.
+Điều này vi phạm nguyên tắc nạp chồng phương thức (method overloading), dẫn đến lỗi biên dịch.
+
+
+15.	Passing parameter
+
+Question: Is JAVA a Pass by Value or a Pass by Reference programming language? 
+Answer: Java là ngôn ngữ Pass by Value. Khi truyền đối tượng vào phương thức, giá trị của tham chiếu (địa chỉ bộ nhớ) được sao chép và truyền vào. 
+Do đó, mọi thay đổi trực tiếp trên thuộc tính của đối tượng sẽ ảnh hưởng đến đối tượng gốc, nhưng việc thay đổi tham chiếu (ví dụ: gán lại đối tượng mới) không ảnh hưởng đến đối tượng bên ngoài.
+
+Question: After the call of swap(jungleDVD, cinderellaDVD) why does the title of these two objects still remain?
+Answer: Phương thức swap nhận hai bản sao của tham chiếu đến jungleDVD và cinderellaDVD. 
+Khi đó hoán đổi hai tham chiếu này trong phương thức, chỉ bản sao bị thay đổi, còn tham chiếu gốc bên ngoài vẫn giữ nguyên. 
+Do đó, title của hai đối tượng không thay đổi.
+
+Question: After the call of changeTitle(jungleDVD, cinderellaDVD.getTitle()) why is the title of the JungleDVD changed?
+Answer: Phương thức changeTitle nhận một bản sao tham chiếu đến jungleDVD. 
+Khi đó thay đổi thuộc tính title của đối tượng thông qua tham chiếu này, nó trỏ đến cùng một vùng nhớ với đối tượng gốc. 
+Do đó, thay đổi này ảnh hưởng trực tiếp đến đối tượng bên ngoài.
