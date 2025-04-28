@@ -1,0 +1,67 @@
+-	What class should implement the Comparable interface?
+Lớp Media nên triển khai Comparable Interface 
+Vì:
++) Media là một lớp cha chung của tất cả phương tiện (DVD, Book, CD), khi triển khai trên Media thì các lớp con sẽ tự động kế thừa Comparator
++) Bằng cách định nghĩa so sánh trong lớp Media sẽ đảm bảo tất cả đối tượng đều được so sánh theo cùng một tiêu chí, tạo ra sự nhất quán trong toàn hệ thống.
++) Khi Media triển khai Comparator ta có thể sử dụng trực tiếp các phương thức sort mà không cần cung cấp Comparator.
+
+-	In those classes, how should you implement the compareTo()method to reflect the ordering that we want?
+1. Nếu muốn sắp xếp title trước sau đó tới cost
+@Override
+public int compareTo(Media other) {
+    // Đầu tiên so sánh theo title
+    int titleCompare = this.getTitle().compareTo(other.getTitle());
+    // Nếu title khác nhau, trả về kết quả so sánh title
+    if (titleCompare != 0) {
+        return titleCompare;
+    }
+    // Nếu title giống nhau, so sánh theo giá (giảm dần)
+    // Đổi vị trí other và this để sắp xếp giảm dần
+    return Float.compare(other.getCost(), this.getCost());
+}
+2. Nếu muốn sắp xếp cost trước sau đó tới title
+@Override
+public int compareTo(Media other) {
+    // Đầu tiên so sánh theo giá (giảm dần)
+    // Đổi vị trí other và this để sắp xếp giảm dần
+    int costCompare = Float.compare(other.getCost(), this.getCost());
+    // Nếu giá khác nhau, trả về kết quả so sánh giá
+    if (costCompare != 0) {
+        return costCompare;
+    }
+    // Nếu giá giống nhau, so sánh theo title
+    return this.getTitle().compareTo(other.getTitle());
+}
+
+-	Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+Chúng ta không thể có 2 quy tắc sắp xếp khác nhau khi sử dụng Comparable Interface
+Vì:
++) Phương thức compareTo() chỉ có thể thể hiện một logic so sánh do đó ta chỉ có thể định nghĩa ra một quy tắc so sánh duy nhất.
+Nếu muốn so sánh theo nhiều quy tắc sắp xếp thì ta có thể sử dụng Comparator như đã dùng bên trên.
+
+-	Suppose the DVDs have a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this?
+Ta có thể sử dụng Comparator riêng dành cho DVD để xử lý trường hợp đặc biệt
+public class DVDComparator implements Comparator<Media> {
+    @Override
+    public int compare(Media media1, Media media2) {
+        // Trường hợp đặc biệt khi cả hai đều là DVD
+        if (media1 instanceof DigitalVideoDisc && media2 instanceof DigitalVideoDisc) {
+            DigitalVideoDisc dvd1 = (DigitalVideoDisc) media1;
+            DigitalVideoDisc dvd2 = (DigitalVideoDisc) media2;
+            // So sánh theo tiêu đề trước
+            int titleCompare = dvd1.getTitle().compareTo(dvd2.getTitle());
+            if (titleCompare != 0) {
+                return titleCompare;
+            }
+            // Nếu tiêu đề giống nhau, so sánh theo độ dài giảm dần
+            int lengthCompare = Integer.compare(dvd2.getLength(), dvd1.getLength());
+            if (lengthCompare != 0) {
+                return lengthCompare;
+            }
+            // Nếu độ dài giống nhau, so sánh theo giá
+            return Float.compare(dvd2.getCost(), dvd1.getCost());
+        }
+        // Nếu không phải là DVD hoặc chỉ có một đối tượng là DVD ta sử dụng so sánh mặc định (VD là title_cost)
+        return Media.COMPARE_BY_TITLE_COST.compare(media1, media2);
+    }
+}
