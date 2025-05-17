@@ -1,0 +1,69 @@
+o	Compare the top-level containers in Swing and AWT
+- Các lớp chính:
++ AWT: jjava.awt.Frame, java.awt.Dialog, java.applet.Applet
++ Swing: javax.swing.JFrame, javax.swing.JDialog, javax.swing.JApplet, javax.swing.JWindow
+- Cơ chế hiển thị:
++) AWT: Heavyweight (mỗi container có peer nguyên bản của OS)
++) Swing: Lightweight (vẽ bằng Java hoàn toàn, không phụ thuộc peer OS)
+- Root pane:
++) AWT: không có
++) Swing: Mỗi top-level Swing chứa JRootPane (với GlassPane, LayeredPane, ContentPane)
+
+o	Compare the class name of components in AWT and the corresponding class’s name in Swing
+- Nút bấm:
++) AWT: Button, Swing: JButton
+- Nhãn: 
++) AWT: Label, Swing: JLabel
+- Ô nhập văn bản
++) AWT: TextField, Swing: JTextField
+- Vùng nhập nhiều dòng:
++) AWT: TextArea, Swing: JTextArea
+- Checkbox
++) AWT: Checkbox, Swing: JCheckBox
+- Radio Button
++) AWT: CheckboxGroup+Checkbox,	Swing: JRadioButton, ButtonGroup
+- Combo box
++) AWT: Choice, Swing: JComboBox
+- List
++) AWT: List, Swing: JList
+- Panel
++) AWT: Panel, Swing: JPanel
+- Scrollbar
++) AWT: Scrollbar, Swing: JScrollBar
+- Menu
++) AWT: MenuBar/Menu/MenuItem, Swing: JMenuBar/JMenu/JMenuItem
+
+o	Compare the event-handling of Swing and AWT applications
+
+* Cả AWT và Swing đều dùng mô hình Delegation Event Model (kể từ JDK 1.1):
+1. Sự kiện được tạo ra (Event Object)
+2. Gửi tới EventListener đăng ký trước đó
+
+* Khác biệt chính:
+- Event Dispatch Thread (EDT)
++) Swing yêu cầu mọi thao tác tương tác hoặc cập nhật giao diện phải thực hiện trên EDT (qua SwingUtilities.invokeLater(...)) để tránh race-condition và đảm bảo thread-safety.
++) AWT cũ không ép buộc chặt, dễ dẫn đến bug khi cập nhật GUI từ thread khác.
+
+- Các Listener mở rộng
++) Swing bổ sung thêm nhiều loại listener: ListSelectionListener, TableModelListener, DocumentListener… để xử lý sự kiện phức tạp hơn.
++) AWT chỉ có các listener cơ bản như ActionListener, MouseListener, KeyListener…
+
+- Model–View separation
++) Swing tách riêng Model (ví dụ TableModel, ListModel) và View (JTable, JList), giúp tái sử dụng và test dễ dàng hơn.
++) AWT không có lớp Model riêng, view trực tiếp quản lý dữ liệu.
+
+o	The resulting appearances of the applications developed using Swing and AWT might be different as well. Make comparisons.
+- AWT (native look)
++) Sử dụng peer của hệ điều hành, do đó giao diện giống y hệt các ứng dụng gốc trên OS đó.
+	Ưu điểm: tính kèm hệ thống (integration) cao.
+	Nhược điểm: mỗi nền tảng khác nhau, giao diện thay đổi, không đồng nhất.
+
+- Swing (pluggable look & feel)
++) Mặc định là Metal, có thể chuyển sang Nimbus, Windows, Motif, hoặc bất kỳ L&F nào tuỳ thích.
++) Giao diện nhẹ nhàng, đồng nhất trên mọi nền tảng.
++) Hỗ trợ theme, skin, custom UI delegate để vẽ hoàn toàn theo thiết kế riêng.
+
+- Kết quả nhận thấy:
++) Ứng dụng AWT sẽ có cảm giác đơ và cồng kềnh trên một số nền tảng.
++) Ứng dụng Swing mượt hơn, hỗ trợ double-buffering tránh nhấp nháy khi vẽ lại, và có thể tạo giao diện hiện đại, linh hoạt.
+
